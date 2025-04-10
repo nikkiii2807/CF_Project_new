@@ -58,10 +58,8 @@ A **Streamlit-based web app** that combines two powerful financial tools:
 ```bash
 # Clone the repo
 git clone https://github.com/nikkiii2807/CF_Project_new.git
-cd CF_Project_new
 
-# Install dependencies
-pip install -r requirements.txt
+
 
 # Run the app
 streamlit run loan.py
