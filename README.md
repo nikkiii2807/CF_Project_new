@@ -13,22 +13,22 @@ A **Streamlit-based web app** that combines two powerful financial tools:
 ![Dashboard](assets/Dashboard.jpeg)
 
 ### 🧠 Decision Simulator
-![Decision Simulator](assets/Decision simulator.jpeg)
+![Decision Simulator](assets/Decisionsimulator.jpeg)
 
 ### 🎮 Financial Journey Game
-![Financial Journey Game](assets/Financial Journey Game .jpeg)
+![Financial Journey Game](assets/FinancialJourneyGame.jpeg)
 
 ### 📝 Game Instructions
-![Financial Journey Game instruction](assets/Financial Journey Game instruction.jpeg)
+![Financial Journey Game instruction](assets/FinancialJourneyGameinstruction.jpeg)
 
 ### 🔥 HeatMap
 ![HeatMap](assets/HeatMap.jpeg)
 
 ### 💸 Loan Impact Analysis
-![Loan Impact Analysis](assets/Loan impact analysis.jpeg)
+![Loan Impact Analysis](assets/Loanimpactanalysis.jpeg)
 
 ### 📈 Loan vs Credit
-![Loan vs Credit](assets/Loan vs Credit.jpeg)
+![Loan vs Credit](assets/LoanvsCredit.jpeg)
 
 
 ## ✨ **Key Features**
