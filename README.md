@@ -1,63 +1,67 @@
-🏦 Smart Loan Predictor & Financial Journey Game
-Welcome to the Smart Loan Predictor & Financial Journey Game – a dual-purpose Streamlit app that helps users:
+# 🏦 **Smart Loan Predictor & Financial Journey Game**
 
-🎯 Predict loan eligibility and personalized financial metrics
+A **Streamlit-based web app** that combines two powerful financial tools:
 
-🎮 Simulate real-world money management decisions in a 24-month interactive game
+- 🔮 **Loan Prediction System** – Get insights into your loan eligibility, EMI, and recommended government schemes.
+- 🎮 **Financial Journey Simulation Game** – Make monthly money decisions and track your financial growth over 24 months!
 
-🚀 Features
-📊 Loan Predictor
-Predict your estimated loan amount and approval chance based on:
+---
 
-Income, Age, Credit Score
+## ✨ **Key Features**
 
-Employment Type, Occupation, and Loan Type
+### 📊 **Loan Predictor**
+- **Estimate your loan eligibility** based on:
+  - **Income, Age, Credit Score, Employment Status, Loan Type, Occupation**
+- **Visualizations:**
+  - 📈 Loan Amount vs Credit Score (Interactive)
+  - 🔥 Heatmap: Credit Score vs Income
+- **Insights:**
+  - 💰 Estimated EMI
+  - ⚖️ Approval Probability
+  - 🧾 Downloadable Loan Report
+- 🧞‍♂️ **Loan Genie:** Get **custom-suggested government schemes** based on your profile
+- ⚠️ **Risk Meter:** Understand your credit health
+- 🧠 **Decision Simulator:** Simulate how loans affect your savings and debt-to-income ratio over time
 
-Dynamic visualizations:
+---
 
-Loan vs Credit Score Plot (Interactive Plotly)
+### 💰 **Financial Journey Game**
+- **Start with ₹1,00,000** and play for **24 months**
+- Choose your monthly action:
+  - 📈 **Invest**: High return, higher risk
+  - 🏦 **Save**: Safe with modest returns
+  - 💸 **Borrow**: Immediate cash but pay EMI later
+- React to **market events** (Recession, Inflation, Bull Run...)
+- 🎯 At the end, discover your:
+  - **Final Net Worth**
+  - **Financial Personality**
+  - **Risk Score**
+  - 📊 Full Financial Summary
 
-Credit Score vs Income Heatmap
+---
 
-Smart insights:
+## 🛠️ **Tech Stack**
 
-Monthly EMI Estimate
+| Tool          | Purpose                     |
+|---------------|-----------------------------|
+| 🐍 Python     | Core logic                  |
+| 🌐 Streamlit  | Web app frontend            |
+| 📊 Matplotlib | Data visualization          |
+| 📈 Plotly     | Interactive charts          |
+| 🧮 Numpy/Pandas | Data computation & handling |
+| 🎨 Seaborn    | Heatmaps                    |
 
-Risk Meter
+---
 
-Suggested Govt. Schemes (based on occupation)
+## 💻 **Setup Instructions**
 
-Downloadable Loan Report
+```bash
+# Clone the repo
+git clone https://github.com/nikkiii2807/CF_Project_new.git
+cd CF_Project_new
 
-💡 "Should I Take This Loan?" Simulator
+# Install dependencies
+pip install -r requirements.txt
 
-Simulate EMI, net savings, debt ratio
-
-Visualize long-term financial impact
-
-💰 Financial Journey Game
-Play a 24-month financial strategy game
-
-Make choices: Invest, Save, or Borrow
-
-Experience market events like 🔥 Inflation, 📉 Recession, 🚀 Bull Run
-
-Track your:
-
-Net Worth over time
-
-Risk score and decision profile
-
-Final financial personality
-
-🛠️ Tech Stack
-Frontend: Streamlit
-
-Visualization: Matplotlib, Plotly, Seaborn
-
-Backend Logic: Pure Python with numpy, pandas, random
-
-Exporting Reports: Base64 encoding
-
-📷 Screenshots
-
+# Run the app
+streamlit run loan.py
