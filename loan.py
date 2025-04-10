@@ -58,11 +58,56 @@ if st.session_state.predicted:
     scores = np.linspace(300, 850, 100)
     loans = (income * 10) * (scores / 850) * employment_factor * loan_type_factor / (loan_term / 10)
 
-    fig, ax = plt.subplots()
-    ax.plot(scores, loans, color='purple')
-    ax.set_xlabel('Credit Score')
-    ax.set_ylabel('Loan Amount ($)')
-    ax.set_title('Loan Amount vs Credit Score')
+    # fig, ax = plt.subplots()
+    # ax.plot(scores, loans, color='purple')
+    # ax.set_xlabel('Credit Score')
+    # ax.set_ylabel('Loan Amount ($)')
+    # ax.set_title('Loan Amount vs Credit Score')
+    # st.pyplot(fig)
+
+    import plotly.graph_objects as go
+
+    #st.subheader("📊 Interactive: Loan Amount vs Credit Score")
+
+    fig7 = go.Figure()
+    fig7.add_trace(go.Scatter(x=scores, y=loans, mode='lines', line=dict(color='purple')))
+    fig7.update_layout(
+        xaxis_title='Credit Score',
+        yaxis_title='Loan Amount ($)',
+        #title='Loan Amount vs Credit Score (Interactive)',
+        template='plotly_dark'
+    )
+    st.plotly_chart(fig7)
+
+
+
+    import seaborn as sns
+
+    st.subheader("🔥 Heatmap: Credit Score vs Predicted Loan Amount")
+
+    # Create ranges
+    cs_range = np.arange(300, 851, 50)
+    income_range = np.arange(1000, 20001, 1000)
+
+    # Generate a 2D matrix
+    heat_data = []
+    for income_val in income_range:
+        row = []
+        for cs_val in cs_range:
+            amt = (income_val * 10) * (cs_val / 850) * employment_factor * loan_type_factor / (loan_term / 10)
+            row.append(amt)
+        heat_data.append(row)
+
+    # Convert to DataFrame for seaborn
+    import pandas as pd
+    df_heat = pd.DataFrame(heat_data, index=income_range, columns=cs_range)
+
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.heatmap(df_heat, cmap="YlGnBu", ax=ax, cbar_kws={'label': 'Loan Amount ($)'}, linewidths=0.5)
+
+    ax.set_title("Credit Score vs Income vs Predicted Loan Amount")
+    ax.set_xlabel("Credit Score")
+    ax.set_ylabel("Monthly Income ($)")
     st.pyplot(fig)
 
     # Metrics
@@ -187,6 +232,56 @@ if st.session_state.predicted:
     ax2.set_title("Financial Simulation Over Loan Period")
     ax2.legend()
     st.pyplot(fig2)
+
+    st.subheader("📊 Debt Burden To Income Ratio")
+
+    # Define dynamic range: only up to sim_duration (+ optional few more years if you want)
+    max_term = sim_duration + 5 if sim_duration + 5 <= 30 else 30
+    terms_dynamic = np.arange(1, max_term + 1)
+
+    dynamic_emis = []
+    dynamic_ratios = []
+    dynamic_savings = []
+
+    for term in terms_dynamic:
+        n = term * 12
+        r = sim_interest / (12 * 100)
+        
+        try:
+            emi_val = (sim_loan_amount * r * (1 + r)**n) / ((1 + r)**n - 1)
+        except ZeroDivisionError:
+            emi_val = 0
+        
+        debt_ratio_val = (emi_val / sim_income) * 100
+        net_saving_val = (sim_income - emi_val) * n
+
+        dynamic_emis.append(emi_val)
+        dynamic_ratios.append(debt_ratio_val)
+        dynamic_savings.append(net_saving_val)
+
+    # Plotting the dynamic range
+    fig4, ax4 = plt.subplots(figsize=(10, 5))
+    ax4.plot(terms_dynamic, dynamic_ratios, marker='o', color='orange', label="Debt-to-Income Ratio (%)")
+    ax4.axvline(sim_duration, color='red', linestyle='--', label=f"Selected Term ({sim_duration} yrs)")
+    ax4.set_xlabel("Loan Term (Years)")
+    ax4.set_ylabel("Debt-to-Income Ratio (%)")
+    ax4.set_title("📉 Financial Impact of Loan Duration")
+    ax4.grid(True)
+    ax4.legend()
+    st.pyplot(fig4)
+
+    # Optional table for breakdown
+    import pandas as pd
+    loan_analysis_df = pd.DataFrame({
+        "Loan Term (Years)": terms_dynamic,
+        "EMI ($)": [f"{e:,.2f}" for e in dynamic_emis],
+        "Debt-to-Income (%)": [f"{d:.2f}" for d in dynamic_ratios],
+        "Net Savings ($)": [f"{s:,.2f}" for s in dynamic_savings],
+    })
+
+    st.subheader("📄 Term-wise Financial Breakdown")
+    st.dataframe(loan_analysis_df, use_container_width=True)
+
 
 # Loan Literacy Game
 st.subheader("🎮 Gamified Loan Literacy Challenge")
